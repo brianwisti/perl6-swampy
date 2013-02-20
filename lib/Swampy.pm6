@@ -33,12 +33,19 @@ $code
 wait_for_user()
 END
 
-        my $python-file = save-code $full-code;
+        my $py-name = make-file-name();
+        my $python-file = save-code($full-code, $py-name);
         say "Python code is in $python-file";
         run-python-with $python-file;
     }
 
-    sub save-code($code, $name='default.py') {
+    # Yes, this is expected to return 'interactive.py' when invoked from
+    # an interactive session, and 'app.pl6.py' for the normal case.
+    sub make-file-name() {
+        PROCESS::<$PROGRAM_NAME> ~ '.py';
+    }
+
+    sub save-code($code, $name) {
         # Don't forget props for http://perl6maven.com/perl6-files
         my $handle = open $name, :w;
         $handle.say($code);
@@ -119,7 +126,10 @@ Turn C<$turtle> 90 degrees to the left.
 
 =item draw-it()
 
-Write code to disk and execute the instructions.
+Write code to disk and execute the instructions. Swampy.pm6 will report the 
+name of the written file - usually the name of the current program with a 
+C<.py> appended. That's C<interactive.py> when run from an interactive Perl 
+6 shell.
 
 =back
 

@@ -12,14 +12,44 @@ Prerequisites
 -------------
 
 * Perl 6
+* [Panda](https://github.com/tadzik/panda/)
 * Python
 * [Swampy](http://www.greenteapress.com/thinkpython/swampy/)
 * A UNIX-ish system is assumed right now.
 
+Installation
+------------
+
+Download [perl6-Swampy](https://github.com/brianwisti/perl6-swampy). Extract it and run `panda install` on the extracted folder.
+
+    $ unzip perl6-swampy-master.zip
+    $ panda install ./perl6-Swampy-master
+
+Documentation
+-------------
+
+Access existing documentation via `p6doc` once perl6-Swampy is installed.
+
+    $ p6doc Swampy
+
 Usage
 -----
 
-Really. It's a bad idea right now. I'm pretty sure it only works on my machine, and only two of the Swampy functions are wrapped. I'm just putting it here because I am pretty sure that it will get better.
+Really. It's a bad idea right now. I'm pretty sure it only works on my machine, and only two of the Swampy functions are wrapped. 
+
+Oh, fine.
+
+    use v6;
+    use Swampy;
+
+    for 1..4 {
+        fd(100);
+        lt();
+    }
+
+    draw-it();
+
+That's it right now. You can go forward and turn right to your heart's content.
 
 Goals
 -----

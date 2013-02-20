@@ -88,7 +88,7 @@ Swampy.pm6 will die if it cannot find a python executable.
 
 =head1 AVAILABLE
 
-=over 4
+=over
 
 =item fd($distance)
 

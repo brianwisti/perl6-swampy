@@ -1,24 +1,32 @@
 
 module Swampy {
     my @directives;
-    my $turtle = 'turtle';
+    my @turtles;
 
-    sub fd($distance) is export {
+    sub make-turtle() is export {
+        my $turtle-count = @turtles.elems;
+        my $next-turtle = "t" ~ ($turtle-count + 1);
+        @turtles.push($next-turtle);
+        return $next-turtle;
+    }
+
+    sub fd($turtle, $distance) is export {
         @directives.push("fd($turtle, $distance)");
     }
 
-    sub lt() is export {
+    sub lt($turtle) is export {
         @directives.push("lt($turtle)");
     }
 
     sub draw-it() is export {
         my $code = @directives.join("\n");
+        my $turtle-code = turtle-code();
 
         my $full-code = qq:to/END/;
 from swampy.TurtleWorld import *
 
 world = TurtleWorld()
-$turtle = Turtle()
+$turtle-code
 
 $code
 
@@ -37,6 +45,10 @@ END
         $handle.close;
 
         return $name;
+    }
+
+    sub turtle-code() {
+        @turtles.map({ "$_ = Turtle()" }).join("\n")
     }
 
     sub run-python-with($script) {
@@ -71,9 +83,11 @@ library.
     use v6;
     use Swampy;
 
+    my $turtle = make-turtle();
+
     for 1..4 {
-        fd(100);
-        lt();
+        fd($turtle, 100);
+        lt($turtle);
     }
 
     draw-it();
@@ -90,13 +104,22 @@ Swampy.pm6 will die if it cannot find a python executable.
 
 =over
 
-=item fd($distance)
+=item make-turtle()
 
-Move the turtle forward $distance pixels, pen down.
+Tell swampy that you want a new turtle for drawing. Returns a name that
+you can use to reference this turtle in future instructions.
 
-=item lt()
+=item fd($turtle, $distance)
 
-Turn the turtle 90 degrees to the left.
+Move C<$turtle> forward $distance pixels, pen down.
+
+=item lt($turtle)
+
+Turn C<$turtle> 90 degrees to the left.
+
+=item draw-it()
+
+Write code to disk and execute the instructions.
 
 =back
 

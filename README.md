@@ -11,9 +11,10 @@ Brian Wisti <https://github.com/brianwisti>
 Prerequisites
 -------------
 
-* Perl 6
+* [Perl 6](http://perl6.org)
+** I am using [Rakudo](http://rakudo.org)
 * [Panda](https://github.com/tadzik/panda/)
-* Python
+* [Python](http://python.org)
 * [Swampy](http://www.greenteapress.com/thinkpython/swampy/)
 * A UNIX-ish system is assumed right now.
 
@@ -42,9 +43,11 @@ Oh, fine.
     use v6;
     use Swampy;
 
+    my $turtle = make-turtle();
+
     for 1..4 {
-        fd(100);
-        lt();
+        fd($turtle, 100);
+        lt($turtle);
     }
 
     draw-it();

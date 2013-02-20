@@ -1,0 +1,8 @@
+{
+    "name":        "Swampy",
+    "version":     "0.0.1",
+    "description": "Perl 6 wrapper for the Swampy suite of Python programs",
+    "depends":     [],
+    "author":      "Brian Wisti",
+    "source-url":  "https://github.com/brianwisti/perl6-swampy"
+}

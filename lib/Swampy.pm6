@@ -14,8 +14,16 @@ module Swampy {
         @directives.push("fd($turtle, $distance)");
     }
 
-    sub lt($turtle) is export {
-        @directives.push("lt($turtle)");
+    sub lt($turtle, $angle=90) is export {
+        @directives.push("lt($turtle, $angle)");
+    }
+
+    sub rt($turtle, $angle=90) is export {
+        @directives.push("rt($turtle, $angle)");
+    }
+
+    sub set-delay($turtle, $delay) is export {
+        @directives.push("$turtle.delay = $delay");
     }
 
     sub draw-it() is export {
@@ -105,7 +113,9 @@ This actually writes a Python script to disk and asks Python to run the script.
 Any error handling is done by Python. The filename is reported to the user for
 debugging purposes.
 
-Swampy.pm6 will die if it cannot find a python executable.
+Swampy.pm6 will die if it cannot find a python executable. The code generation is
+also simplistic at this point. That means Python will be the one catching argument
+errors.
 
 =head1 AVAILABLE
 
@@ -120,9 +130,17 @@ you can use to reference this turtle in future instructions.
 
 Move C<$turtle> forward $distance pixels, pen down.
 
-=item lt($turtle)
+=item lt($turtle, $angle=90)
 
-Turn C<$turtle> 90 degrees to the left.
+Turn C<$turtle> to the left by C<$angle> degrees.
+
+=item rt($turtle, $angle=90)
+
+Turn C<$turtle> to the right by C<$angle> degrees.
+
+=item set-delay($turtle, $delay)
+
+Change the time between executing directives for C<$turtle>, in seconds. Yes, fractional values are supported.
 
 =item draw-it()
 

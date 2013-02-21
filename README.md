@@ -36,7 +36,7 @@ Access existing documentation via `p6doc` once perl6-Swampy is installed.
 Usage
 -----
 
-Really. It's a bad idea right now. I'm pretty sure it only works on my machine, and only two of the Swampy functions are wrapped. 
+Really. It's a bad idea right now. I'm pretty sure it only works on my machine, and only a handful of the Swampy functions are wrapped. 
 
 Oh, fine.
 
@@ -44,10 +44,21 @@ Oh, fine.
     use Swampy;
 
     my $turtle = make-turtle();
+    set-delay($turtle, 0.01);
+
+    for 1..8 {
+        fd($turtle, 100);
+        lt($turtle, 45);
+    }
+
+    pu($turtle);
+    rt($turtle);
+    fd($turtle, 10);
+    pd($turtle);
 
     for 1..4 {
         fd($turtle, 100);
-        lt($turtle);
+        rt($turtle);
     }
 
     draw-it();

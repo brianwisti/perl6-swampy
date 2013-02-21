@@ -18,6 +18,14 @@ module Swampy {
         @directives.push("lt($turtle, $angle)");
     }
 
+    sub pd($turtle) is export {
+        @directives.push("pd($turtle)");
+    }
+
+    sub pu($turtle) is export {
+        @directives.push("pu($turtle)");
+    }
+
     sub rt($turtle, $angle=90) is export {
         @directives.push("rt($turtle, $angle)");
     }
@@ -119,36 +127,41 @@ errors.
 
 =head1 AVAILABLE
 
-=over
-
-=item make-turtle()
+=defn C<make-turtle()>
 
 Tell swampy that you want a new turtle for drawing. Returns a name that
 you can use to reference this turtle in future instructions.
 
-=item fd($turtle, $distance)
+=defn C<fd($turtle, $distance)>
 
 Move C<$turtle> forward $distance pixels, pen down.
 
-=item lt($turtle, $angle=90)
+=defn C<lt($turtle, $angle=90)>
 
 Turn C<$turtle> to the left by C<$angle> degrees.
 
-=item rt($turtle, $angle=90)
+=defn C<pd($turtle)>
+
+Put down C<$turtle>. Moving C<$turtle> around will leave a trail.
+
+=defn C<pu($turtle)>
+
+Pick up C<$turtle>. You can move C<$turtle> without leaving a trail until
+you put it down with C<pd>.
+
+=defn C<rt($turtle, $angle=90)>
 
 Turn C<$turtle> to the right by C<$angle> degrees.
 
-=item set-delay($turtle, $delay)
+=defn C<set-delay($turtle, $delay)>
 
 Change the time between executing directives for C<$turtle>, in seconds. Yes, fractional values are supported.
 
-=item draw-it()
+=defn C<draw-it()>
 
 Write code to disk and execute the instructions. Swampy.pm6 will report the 
 name of the written file - usually the name of the current program with a 
 C<.py> appended. That's C<interactive.py> when run from an interactive Perl 
 6 shell.
-
-=back
 
 =end pod

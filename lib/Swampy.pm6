@@ -10,8 +10,20 @@ module Swampy {
         return $next-turtle;
     }
 
+    sub bk($turtle, $distance) is export {
+        @directives.push("bk($turtle, $distance)");
+    }
+
+    sub dump-canvas() is export {
+        @directives.push("world.canvas.dump()");
+    }
+
     sub fd($turtle, $distance) is export {
         @directives.push("fd($turtle, $distance)");
+    }
+
+    sub kill-turtle($turtle) is export {
+        @directives.push("die($turtle)");
     }
 
     sub lt($turtle, $angle=90) is export {
@@ -132,9 +144,22 @@ errors.
 Tell swampy that you want a new turtle for drawing. Returns a name that
 you can use to reference this turtle in future instructions.
 
+=defn C<bk($turtle, $distance)>
+
+Move C<$turtle> backward C<$distance> pixels.
+
+=defn C<dump-canvas()>
+
+Write the current canvas to file C<canvas.eps>.
+
 =defn C<fd($turtle, $distance)>
 
-Move C<$turtle> forward $distance pixels, pen down.
+Move C<$turtle> forward $distance pixels.
+
+=defn C<kill-turtle($turtle)>
+
+Shuffle off this mortal C<$turtle>, indicating that no further directives
+will be sent its way.
 
 =defn C<lt($turtle, $angle=90)>
 

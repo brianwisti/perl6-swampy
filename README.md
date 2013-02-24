@@ -63,7 +63,7 @@ Oh, fine.
 
     draw-it();
 
-That's it right now. You can go forward and turn right to your heart's content.
+That's it right now. You can go forward and turn right or left to your heart's content.
 
 Goals
 -----
